@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Number Vault · Simple Storage dApp</title>
+  <meta name="description" content="Store a number on the Ethereum blockchain and read it back with MetaMask." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="intro">
+      <h1>Number Vault</h1>
+      <p>
+        A tiny Ethereum app. Save one number on the blockchain, then read it back
+        from anywhere. Built with Solidity, Hardhat, Ethers.js and MetaMask.
+      </p>
+    </header>
+
+    <section class="panel" aria-labelledby="wallet-h">
+      <h2 id="wallet-h">Wallet</h2>
+
+      <div id="no-wallet" class="notice notice-warn" hidden>
+        MetaMask was not found in this browser. Install it from
+        <a href="https://metamask.io/download/" target="_blank" rel="noopener">metamask.io</a>
+        and reload this page.
+      </div>
+
+      <div id="connect-help" class="notice">
+        <strong>Before you start:</strong> click <em>Connect wallet</em>, approve the
+        request in MetaMask, and make sure MetaMask is on the network shown below.
+      </div>
+
+      <button id="connect-btn" class="btn btn-primary" type="button">Connect wallet</button>
+
+      <dl class="facts">
+        <div>
+          <dt>Account</dt>
+          <dd id="account" class="mono">Not connected</dd>
+        </div>
+        <div>
+          <dt>Network</dt>
+          <dd id="network"><span class="dot dot-off"></span><span id="network-text">Not connected</span></dd>
+        </div>
+        <div>
+          <dt>Contract</dt>
+          <dd id="contract-addr" class="mono">Not configured</dd>
+        </div>
+      </dl>
+
+      <button id="switch-btn" class="btn btn-secondary" type="button" hidden>Switch MetaMask network</button>
+    </section>
+
+    <section class="panel" aria-labelledby="store-h">
+      <h2 id="store-h">Store a number</h2>
+      <p class="hint">Sending a number is a blockchain transaction. MetaMask will ask you to confirm it and a small gas fee applies.</p>
+      <label for="number-input">Whole number (0 or greater)</label>
+      <div class="row">
+        <input id="number-input" type="text" inputmode="numeric" autocomplete="off" placeholder="e.g. 42" />
+        <button id="store-btn" class="btn btn-primary" type="button" disabled>Store number</button>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="read-h">
+      <h2 id="read-h">Stored number</h2>
+      <p class="hint">Reading is free and needs no confirmation.</p>
+      <div class="slot" aria-live="polite">
+        <span id="stored-value" class="slot-value mono">–</span>
+      </div>
+      <button id="retrieve-btn" class="btn btn-secondary" type="button" disabled>Retrieve number</button>
+    </section>
+
+    <section id="status" class="status" role="status" aria-live="polite" hidden>
+      <span id="spinner" class="spinner" hidden></span>
+      <div>
+        <p id="status-text"></p>
+        <p id="status-extra" class="mono small"></p>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>Local blockchains only work on your own computer. To use this site with other people, deploy the contract to a public testnet such as Sepolia (see README).</p>
+    </footer>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.4/ethers.umd.min.js"></script>
+  <script src="contract-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

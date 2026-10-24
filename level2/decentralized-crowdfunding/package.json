@@ -1,0 +1,22 @@
+{
+  "name": "decentralized-crowdfunding",
+  "version": "1.0.0",
+  "description": "Educational decentralized crowdfunding dApp (Solidity + Hardhat + Ethers.js)",
+  "license": "MIT",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "coverage": "hardhat coverage",
+    "node": "hardhat node",
+    "deploy": "hardhat run scripts/deploy.js --network localhost",
+    "frontend": "http-server public -p 3000 -c-1",
+    "clean": "hardhat clean"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.22.10",
+    "http-server": "^14.1.1",
+    "solc": "0.8.24"
+  }
+}

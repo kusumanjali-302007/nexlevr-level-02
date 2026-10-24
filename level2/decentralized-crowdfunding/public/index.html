@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Decentralized Crowdfunding</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">🚀 <span>Decentralized Crowdfunding</span> <span id="liveDot" class="live off" title="Live connection to the blockchain">● connecting…</span></div>
+    <div class="wallet">
+      <div id="walletInfo" class="wallet-info hidden">
+        <span id="accountShort" class="mono" title=""></span>
+        <span id="balance" class="balance">—</span>
+      </div>
+      <button id="connectBtn" class="btn primary">Connect MetaMask</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="networkWarning" class="notice warn hidden">
+      <span>Your wallet is on the wrong network. Switch to the local Hardhat network (chain ID <b id="expectedChain">31337</b>).</span>
+      <button id="switchBtn" class="btn small">Switch network</button>
+    </div>
+
+    <div id="status" class="status hidden" role="status" aria-live="polite">
+      <span id="spinner" class="spinner hidden"></span>
+      <span id="statusText"></span>
+    </div>
+
+    <p class="muted small">
+      Contract: <span id="contractAddress" class="mono">not loaded</span> &middot; Test ETH only
+    </p>
+
+    <section class="card">
+      <h2>Create a campaign</h2>
+      <div class="form-row">
+        <label>Funding goal (ETH)
+          <input id="goalInput" type="number" min="0" step="any" placeholder="e.g. 10" inputmode="decimal" />
+        </label>
+        <label>Duration
+          <div class="inline">
+            <input id="durationInput" type="number" min="0" step="any" placeholder="e.g. 7" inputmode="decimal" />
+            <select id="durationUnit" aria-label="Duration unit">
+              <option value="60">minutes</option>
+              <option value="3600">hours</option>
+              <option value="86400" selected>days</option>
+            </select>
+          </div>
+        </label>
+        <button id="createBtn" class="btn primary">Create campaign</button>
+      </div>
+      <p class="muted small">Duration must be between 1 minute and 365 days.</p>
+    </section>
+
+    <section class="card">
+      <h2>Live activity</h2>
+      <ul id="feed" class="feed"><li class="muted small">Waiting for new blockchain activity…</li></ul>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Campaigns</h2>
+        <button id="refreshBtn" class="btn small">Refresh</button>
+      </div>
+      <div id="campaigns" class="grid"></div>
+      <p id="emptyMsg" class="muted hidden">No campaigns yet. Create the first one above!</p>
+    </section>
+  </main>
+
+  <footer class="footer muted small">Educational project &mdash; use test ETH only.</footer>
+
+  <script src="vendor/ethers.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
